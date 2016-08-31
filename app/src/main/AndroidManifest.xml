@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nirma.libapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -17,8 +17,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".Contactus"
+        <activity
+            android:name=".Contactus"
             android:label="ContactUs"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -26,7 +26,8 @@
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-        <activity android:name=".Search"
+        <activity
+            android:name=".Search"
             android:label="Search"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -36,20 +37,60 @@
         </activity>
         <activity
             android:name=".ELib"
-            android:parentActivityName=".MainActivity"
-            android:label="E-Library">
+            android:label="E-Library"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-        <activity android:name=".DigContent"></activity>
+        <activity
+            android:name=".DigContent"
+            android:label="Digtal Content"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+            />
+        </activity>
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".NewArrival"
+            android:label="New Arrival"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+            />
+        </activity>
+        <activity android:name=".PeriodicContent"
+            android:label="Periodic Content"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+            />
+        </activity>
+        <activity android:name=".NewsClips"
+            android:label="NewsClips"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+            />
+        </activity>
+        <activity android:name=".ExamPapers"
+            android:label="ExamPapers"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+            />
         </activity>
     </application>
 

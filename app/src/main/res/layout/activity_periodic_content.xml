@@ -3,12 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nirma.libapp.DigContent">
-
-
+    tools:context="com.nirma.libapp.PeriodicContent">
 
     <include
-        android:id="@+id/Digitalttoolbar"
+        android:id="@+id/periodicContenttoolbar"
         layout="@layout/tool_bar" />
 
     <LinearLayout
@@ -18,15 +16,14 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:layout_below="@id/Digitalttoolbar">
+        android:layout_below="@id/periodicContenttoolbar">
 
         <WebView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/digwebView"
+            android:id="@+id/periodicContentwebView"
             />
     </LinearLayout>
-
 
 
 </RelativeLayout>
