@@ -19,12 +19,12 @@ public class ELib extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_elib);
         Toolbar toolbar = (Toolbar) findViewById(R.id.elibtoolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setContentView(R.layout.activity_elib);
         browse = (WebView) findViewById(R.id.elibwebView);
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
