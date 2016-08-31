@@ -1,5 +1,8 @@
 package com.nirma.libapp;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -15,11 +18,15 @@ public class Search extends AppCompatActivity {
     WebView browse;
     WebSettings ws;
     private static final String url = "http://librarysearch.nirmauni.ac.in";
+    private ProgressDialog progressDialog=null;
+    private boolean isredirected = false;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        context = this;
         Toolbar toolbar = (Toolbar) findViewById(R.id.searchtoolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -43,6 +50,35 @@ public class Search extends AppCompatActivity {
                 return false;
             }
             return super.shouldOverrideUrlLoading(view, url);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            isredirected = false;
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+            if(!isredirected){
+                if(progressDialog==null){
+                    progressDialog = new ProgressDialog(Search.this);
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            isredirected=true;
+
+            if (progressDialog!=null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+                progressDialog = null;
+            }
         }
     }
 
