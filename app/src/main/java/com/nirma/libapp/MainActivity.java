@@ -26,18 +26,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.maintoolbar);
         setSupportActionBar(toolbar);
 
-        Bitmap userIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.home);
-        Bitmap homeIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.search);
+        Bitmap search = BitmapFactory.decodeResource(this.getResources(), R.drawable.search);
+        Bitmap papers = BitmapFactory.decodeResource(this.getResources(), R.drawable.papers);
+        Bitmap periodic = BitmapFactory.decodeResource(this.getResources(), R.drawable.periodic);
+        Bitmap userIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.elib);
+        Bitmap newarrival = BitmapFactory.decodeResource(this.getResources(), R.drawable.newarr);
+        Bitmap digital = BitmapFactory.decodeResource(this.getResources(), R.drawable.digital);
+
+        Bitmap news = BitmapFactory.decodeResource(this.getResources(), R.drawable.news);
+
+        Bitmap contact = BitmapFactory.decodeResource(this.getResources(), R.drawable.contact);
+
 
 
         gridArray.add(new Item(userIcon,"E-Lib"));
-        gridArray.add(new Item(homeIcon,"DigitalContent"));
-        gridArray.add(new Item(userIcon,"Search"));
-        gridArray.add(new Item(homeIcon,"NewArrival"));
-        gridArray.add(new Item(userIcon,"PeriodicContents"));
-        gridArray.add(new Item(homeIcon,"NewsClips"));
-        gridArray.add(new Item(userIcon,"ExamPapers"));
-        gridArray.add(new Item(homeIcon,"ContactUS"));
+        gridArray.add(new Item(digital,"Digital Content"));
+        gridArray.add(new Item(search,"Search"));
+        gridArray.add(new Item(newarrival,"New Arrival"));
+        gridArray.add(new Item(periodic,"Periodic Content"));
+        gridArray.add(new Item(news,"News Clips"));
+        gridArray.add(new Item(papers,"Exam Papers"));
+        gridArray.add(new Item(contact,"Contact-us"));
 
 
         gridView = (GridView) findViewById(R.id.gridView);
@@ -53,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         i = new Intent(MainActivity.this,ELib.class);
                         startActivity(i);
                         break;
-                    case "Digital":
+                    case "Digital Content":
                         i = new Intent(MainActivity.this,DigContent.class);
                         startActivity(i);
                         break;
@@ -61,23 +70,23 @@ public class MainActivity extends AppCompatActivity {
                         i = new Intent(MainActivity.this,Search.class);
                         startActivity(i);
                         break;
-                    case "ContactUS":
+                    case "Contact-us":
                         i = new Intent(MainActivity.this,Contactus.class);
                         startActivity(i);
                         break;
-                    case "NewArrival":
+                    case "New Arrival":
                         i = new Intent(MainActivity.this,NewArrival.class);
                         startActivity(i);
                         break;
-                    case "PeriodicContents":
+                    case "Periodic Content":
                         i = new Intent(MainActivity.this,PeriodicContent.class);
                         startActivity(i);
                         break;
-                    case "NewsClips":
+                    case "News Clips":
                         i = new Intent(MainActivity.this,NewsClips.class);
                         startActivity(i);
                         break;
-                    case "ExamPapers":
+                    case "Exam Papers":
                         i = new Intent(MainActivity.this,ExamPapers.class);
                         startActivity(i);
                         break;
