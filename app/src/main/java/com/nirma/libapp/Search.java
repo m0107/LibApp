@@ -75,7 +75,7 @@ public class Search extends AppCompatActivity {
             super.onPageFinished(view, url);
             isredirected=true;
 
-            if (progressDialog.isShowing()) {
+            if (progressDialog!=null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
                 progressDialog = null;
             }

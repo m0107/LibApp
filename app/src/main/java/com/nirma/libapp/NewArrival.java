@@ -18,6 +18,8 @@ public class NewArrival extends AppCompatActivity {
     WebView browse;
     WebSettings ws;
     private static final String MyUrl = "http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=ITDIS";
+    private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
+
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
 
@@ -72,7 +74,7 @@ public class NewArrival extends AppCompatActivity {
             super.onPageFinished(view, url);
             isredirected=true;
 
-            if (progressDialog.isShowing()) {
+            if (progressDialog!=null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
                 progressDialog = null;
             }
@@ -83,7 +85,7 @@ public class NewArrival extends AppCompatActivity {
     public void onBackPressed() {
 
         Log.d("url:",browse.getUrl());
-        if(browse.getUrl().equals(MyUrl)){
+        if(browse.getUrl().equals(MyUrl) || browse.getUrl().equals(googleUrl)){
             this.finish();
 
         }
