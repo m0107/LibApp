@@ -1,7 +1,10 @@
 package com.nirma.libapp;
 
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class Contactus extends AppCompatActivity {
@@ -12,6 +15,11 @@ public class Contactus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactus);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.contacttoolbar);
+        if (toolbar != null) {
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         tv = (TextView) findViewById(R.id.contact);
         tv2 = (TextView) findViewById(R.id.timing);
         String text = "The Librarian\n" +
@@ -35,5 +43,19 @@ public class Contactus extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+
+
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
