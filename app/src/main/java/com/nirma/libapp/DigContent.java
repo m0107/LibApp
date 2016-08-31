@@ -1,5 +1,7 @@
 package com.nirma.libapp;
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -15,7 +17,10 @@ public class DigContent extends AppCompatActivity {
 
     WebView browse;
     WebSettings ws;
-    private static final String url = "https://sites.google.com/a/nirmauni.ac.in/content";
+    private static final String url = "https://sites.google.com/a/nirmauni.ac.in/content/";
+    private static final String googleUrl =  "https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
+    private ProgressDialog progressDialog=null;
+    private boolean isredirected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +47,46 @@ public class DigContent extends AppCompatActivity {
             }
             return super.shouldOverrideUrlLoading(view, url);
         }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            isredirected = false;
+            Log.d("pagestart:","true");
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+            Log.d("pageLoad1:","true");
+            if(!isredirected){
+                if(progressDialog==null){
+                    progressDialog = new ProgressDialog(DigContent.this);
+                    Log.d("pageLoad2:","true");
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            isredirected=true;
+            Log.d("pagefin:","true");
+
+            if (progressDialog!=null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+                progressDialog = null;
+            }
+        }
     }
 
     @Override
     public void onBackPressed() {
         Log.d("url:",browse.getUrl());
 
-        if(browse.getUrl().equals(url)){
+        if(browse.getUrl().equals(url) || browse.getUrl().equals(googleUrl)){
             this.finish();
 
         }

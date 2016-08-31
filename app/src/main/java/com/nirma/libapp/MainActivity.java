@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         i = new Intent(MainActivity.this,ELib.class);
                         startActivity(i);
                         break;
-                    case "Digital Content":
+                    case"Digital Content":
                         i = new Intent(MainActivity.this,DigContent.class);
                         startActivity(i);
                         break;
