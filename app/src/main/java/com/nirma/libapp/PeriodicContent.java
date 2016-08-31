@@ -1,5 +1,7 @@
 package com.nirma.libapp;
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,8 @@ public class PeriodicContent extends AppCompatActivity {
     WebView browse;
     WebSettings ws;
     private static final String MyUrl = "https://sites.google.com/a/nirmauni.ac.in/content/?pli=1";
+    private ProgressDialog progressDialog=null;
+    private boolean isredirected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,35 @@ public class PeriodicContent extends AppCompatActivity {
                 return false;
             }
             return super.shouldOverrideUrlLoading(view, url);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            isredirected = false;
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+            if(!isredirected){
+                if(progressDialog==null){
+                    progressDialog = new ProgressDialog(PeriodicContent.this);
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            isredirected=true;
+
+            if (progressDialog.isShowing()) {
+                progressDialog.dismiss();
+                progressDialog = null;
+            }
         }
     }
 
