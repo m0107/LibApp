@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap contact = BitmapFactory.decodeResource(this.getResources(), R.drawable.contact);
 
+        Animation animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.grid_item_anim);
+        GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
 
 
         gridArray.add(new Item(userIcon,"E-Lib"));
@@ -52,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         gridView = (GridView) findViewById(R.id.gridView);
         customGridAdapter = new CustomGridViewAdapter(this, R.layout.customgridview, gridArray);
         gridView.setAdapter(customGridAdapter);
+        gridView.setLayoutAnimation(controller);
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
