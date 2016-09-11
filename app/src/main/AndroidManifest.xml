@@ -45,8 +45,8 @@
             />
         </activity>
         <activity
-            android:name=".DigContent"
-            android:label="Digtal Content"
+            android:name=".Login"
+            android:label="Login"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

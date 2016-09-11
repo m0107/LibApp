@@ -13,19 +13,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-public class DigContent extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     WebView browse;
     WebSettings ws;
-    private static final String url = "https://sites.google.com/a/nirmauni.ac.in/content/";
-    private static final String googleUrl =  "https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
+    private static final String url = "http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-user.pl";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dig_content);
+        setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.Digitalttoolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
@@ -61,7 +60,7 @@ public class DigContent extends AppCompatActivity {
             Log.d("pageLoad1:","true");
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(DigContent.this);
+                    progressDialog = new ProgressDialog(Login.this);
                     Log.d("pageLoad2:","true");
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
@@ -86,7 +85,7 @@ public class DigContent extends AppCompatActivity {
     public void onBackPressed() {
         Log.d("url:",browse.getUrl());
 
-        if(browse.getUrl().equals(url) || browse.getUrl().equals(googleUrl)){
+        if(browse.getUrl().equals(url)){
             this.finish();
 
         }
