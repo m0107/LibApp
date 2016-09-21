@@ -12,7 +12,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.GridLayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         gridArray.add(new Item(userIcon,"E-Lib"));
-        gridArray.add(new Item(digital,"Digital Content"));
+        gridArray.add(new Item(digital,"Login"));
         gridArray.add(new Item(search,"Search"));
         gridArray.add(new Item(newarrival,"New Arrival"));
         gridArray.add(new Item(periodic,"Periodic Content"));
@@ -69,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
                         i = new Intent(MainActivity.this,ELib.class);
                         startActivity(i);
                         break;
-                    case"Digital Content":
-                        i = new Intent(MainActivity.this,DigContent.class);
+                    case"Login":
+                        i = new Intent(MainActivity.this,Login.class);
                         startActivity(i);
                         break;
                     case "Search":
