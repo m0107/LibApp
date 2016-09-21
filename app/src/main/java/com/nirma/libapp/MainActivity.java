@@ -27,13 +27,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.maintoolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setLogo(R.drawable.nu);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         Bitmap search = BitmapFactory.decodeResource(this.getResources(), R.drawable.search);
         Bitmap papers = BitmapFactory.decodeResource(this.getResources(), R.drawable.papers);
         Bitmap periodic = BitmapFactory.decodeResource(this.getResources(), R.drawable.periodic);
         Bitmap userIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.elib);
         Bitmap newarrival = BitmapFactory.decodeResource(this.getResources(), R.drawable.newarr);
-        Bitmap digital = BitmapFactory.decodeResource(this.getResources(), R.drawable.digital);
+        Bitmap login = BitmapFactory.decodeResource(this.getResources(), R.drawable.login);
 
         Bitmap news = BitmapFactory.decodeResource(this.getResources(), R.drawable.news);
 
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         gridArray.add(new Item(userIcon,"E-Lib"));
-        gridArray.add(new Item(digital,"Login"));
+        gridArray.add(new Item(login,"Login"));
         gridArray.add(new Item(search,"Search"));
         gridArray.add(new Item(newarrival,"New Arrival"));
         gridArray.add(new Item(periodic,"Periodic Content"));
