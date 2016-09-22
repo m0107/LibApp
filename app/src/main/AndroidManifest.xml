@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".Contactus"
-            android:label="ContactUs"
+            android:label="Contact Us"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -37,7 +37,7 @@
         </activity>
         <activity
             android:name=".ELib"
-            android:label="E-Library"
+            android:label="Remote Access"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".Login"
-            android:label="Login"
+            android:label="Login Library Acc."
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -69,7 +69,7 @@
             />
         </activity>
         <activity android:name=".PeriodicContent"
-            android:label="Periodic Content"
+            android:label="Content Page Service"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
