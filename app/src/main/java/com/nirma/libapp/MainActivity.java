@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setLogo(R.drawable.nu);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
+        getSupportActionBar().setTitle(" ITNU Library");
 
         Bitmap search = BitmapFactory.decodeResource(this.getResources(), R.drawable.search);
         Bitmap papers = BitmapFactory.decodeResource(this.getResources(), R.drawable.papers);
         Bitmap periodic = BitmapFactory.decodeResource(this.getResources(), R.drawable.periodic);
-        Bitmap userIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.elib);
+        Bitmap userIcon = BitmapFactory.decodeResource(this.getResources(), R.drawable.laptop);
         Bitmap newarrival = BitmapFactory.decodeResource(this.getResources(), R.drawable.newarr);
         Bitmap login = BitmapFactory.decodeResource(this.getResources(), R.drawable.login);
 
@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
 
 
-        gridArray.add(new Item(userIcon,"E-Lib"));
-        gridArray.add(new Item(login,"Login"));
+        gridArray.add(new Item(userIcon,"Remote Access"));
+        gridArray.add(new Item(login,"Login-Library Account"));
         gridArray.add(new Item(search,"Search"));
         gridArray.add(new Item(newarrival,"New Arrival"));
-        gridArray.add(new Item(periodic,"Periodic Content"));
+        gridArray.add(new Item(periodic,"Content Page Service"));
         gridArray.add(new Item(news,"News Clips"));
         gridArray.add(new Item(papers,"Exam Papers"));
         gridArray.add(new Item(contact,"Contact-us"));
@@ -67,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
                 Item data = gridArray.get(pos);
                 Intent i;
                 switch(data.getTitle()){
-                    case "E-Lib":
+                    case "Remote Access":
                         i = new Intent(MainActivity.this,ELib.class);
                         startActivity(i);
                         break;
-                    case"Login":
+                    case"Login-Library Account":
                         i = new Intent(MainActivity.this,Login.class);
                         startActivity(i);
                         break;
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         i = new Intent(MainActivity.this,NewArrival.class);
                         startActivity(i);
                         break;
-                    case "Periodic Content":
+                    case "Content Page Service":
                         i = new Intent(MainActivity.this,PeriodicContent.class);
                         startActivity(i);
                         break;
