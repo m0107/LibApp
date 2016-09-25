@@ -60,7 +60,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewArrival"
+        <activity
+            android:name=".NewArrival"
             android:label="New Arrival"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -68,7 +69,8 @@
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-        <activity android:name=".PeriodicContent"
+        <activity
+            android:name=".PeriodicContent"
             android:label="Content Page Service"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -76,7 +78,8 @@
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-        <activity android:name=".NewsClips"
+        <activity
+            android:name=".NewsClips"
             android:label="NewsClips"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -84,13 +87,27 @@
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-        <activity android:name=".ExamPapers"
+        <activity
+            android:name=".ExamPapers"
             android:label="ExamPapers"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
+        </activity>
+
+        <activity android:name=".AboutLib"
+            android:label="About-Library"
+            android:parentActivityName=".MainActivity">
+
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+
+
+
         </activity>
     </application>
 

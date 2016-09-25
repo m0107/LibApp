@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ITNU LIB</string>
+    <string name="about_us">Recognizing the role of library and information services in meeting the requirements of the Institutes academic, research, training and consultancy activities.
+        The Library was set-up as one of the key divisions of the Institute of Technology, Nirma University.
+        The Institute of Technology Library is one of the best engineering libraries in the state.
+        The collection is mainly strong in engineering and technology, however good information sources on humanities and social sciences are also available.</string>
 </resources>
