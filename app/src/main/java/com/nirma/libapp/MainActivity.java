@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap contact = BitmapFactory.decodeResource(this.getResources(), R.drawable.contact);
 
         Animation animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.grid_item_anim);
-        GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
+        GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .1f, .1f);
 
 
         gridArray.add(new Item(userIcon,"Remote Access"));
