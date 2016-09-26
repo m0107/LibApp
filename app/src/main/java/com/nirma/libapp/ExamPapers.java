@@ -63,6 +63,8 @@ public class ExamPapers extends AppCompatActivity {
             if(!isredirected){
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(ExamPapers.this);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setCancelable(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                 }

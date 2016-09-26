@@ -64,6 +64,8 @@ public class Search extends AppCompatActivity {
             if(!isredirected){
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(Search.this);
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setCancelable(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                 }
