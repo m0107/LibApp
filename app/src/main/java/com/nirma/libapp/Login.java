@@ -61,7 +61,8 @@ public class Login extends AppCompatActivity {
             if(!isredirected){
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(Login.this);
-                    Log.d("pageLoad2:","true");
+                    progressDialog.setIndeterminate(true);
+                    progressDialog.setCancelable(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                 }
