@@ -76,7 +76,7 @@ public class Search extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            if(progressDialog!=null || progressDialog.isShowing()) {
+                            if(progressDialog!=null && progressDialog.isShowing()) {
                                 final Intent mainIntent = new Intent(Search.this, MainActivity.class);
                                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(mainIntent);
