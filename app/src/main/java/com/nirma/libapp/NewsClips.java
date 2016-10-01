@@ -64,7 +64,8 @@ public class NewsClips extends AppCompatActivity {
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(NewsClips.this);
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(false);
+                    progressDialog.setCancelable(true);
+                    progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                 }
