@@ -1,8 +1,10 @@
 package com.nirma.libapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 public class NewArrival extends AppCompatActivity {
 
@@ -68,6 +71,19 @@ public class NewArrival extends AppCompatActivity {
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(progressDialog!=null || progressDialog.isShowing()) {
+                                final Intent mainIntent = new Intent(NewArrival.this, MainActivity.class);
+                                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                NewArrival.this.finish();
+                                Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 5000);
                 }
             }
         }
