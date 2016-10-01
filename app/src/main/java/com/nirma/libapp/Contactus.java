@@ -31,14 +31,14 @@ public class Contactus extends AppCompatActivity {
                 "Gujarat, India\n" +
                 "\n" +
                 "E-mail: lib.it@nirmauni.ac.in\n" +
-                "Phone No: +91 - 2717 - 241911 to 15\n" +
-                "Fax No: +91 - 2717 - 241916 - 17\n";
+                "Phone No: +91-2717-241911 to 15\n" +
+                "Fax No: +91-2717-241916-17\n";
         tv.setText(text);
 
-        String timing = "Library Timing\n" +
-                "Monday – Friday: 08.45 am to 09.15 pm\n" +
-                "Saturday: 08.45 to 04.00\n" +
-                "Closed on Sundays & Public Holidays\n";
+        String timing =
+                "Monday – Friday\n"+ "08:45 am to 06:15 pm\n\n" +
+                "Saturday:\n"+"08:45 am to 01:00 pm\n\n" +
+                "*Closed on Sundays & Public Holidays\n";
         tv2.setText(timing);
 
 

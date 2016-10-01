@@ -3,6 +3,7 @@ package com.nirma.libapp;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +89,9 @@ public class Login extends AppCompatActivity {
     public void onBackPressed() {
         Log.d("url:",browse.getUrl());
 
+
+
+
         if(browse.getUrl().equals(url)){
             this.finish();
 
@@ -113,4 +117,7 @@ public class Login extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    
 }
