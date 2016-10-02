@@ -1,8 +1,10 @@
 package com.nirma.libapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +14,10 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ExamPapers extends AppCompatActivity {
 
@@ -62,14 +68,49 @@ public class ExamPapers extends AppCompatActivity {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(ExamPapers.this);
+                    progressDialog = new ProgressDialog(ExamPapers.this){
+                        @Override
+                        public void onBackPressed() {
+                            super.onBackPressed();
+                            browse.stopLoading();
+                            progressDialog.cancel();
+                            progressDialog.dismiss();
+                        }
+                    };
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(false);
+                    //progressDialog.setCancelable(true);
+                    //progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(progressDialog!=null && progressDialog.isShowing()) {
+                                final Intent mainIntent = new Intent(ExamPapers.this, MainActivity.class);
+                                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                ExamPapers.this.finish();
+                                Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }, 5000);
+                    // Time Scheduler method
+                    /*TimerTask task = new TimerTask() {
+
+                        @Override
+                        public void run() {
+                            // TODO Auto-generated method stub
+                            Intent intent = new Intent(ExamPapers.this, MainActivity.class);
+                            startActivity(intent);
+                            ExamPapers.this.finish();
+                        }
+                    };
+                    Timer t = new Timer();
+                    t.schedule(task, 5000);*/
                 }
             }
         }
+
 
         @Override
         public void onPageFinished(WebView view, String url) {
