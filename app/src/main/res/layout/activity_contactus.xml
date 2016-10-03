@@ -27,15 +27,43 @@
             card_view:cardCornerRadius="2dp"
             card_view:contentPadding="10dp">
 
-            <TextView
-                android:id="@+id/contact"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autoLink="email"
-                android:padding="10dp"
-                android:text="Testing only"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:autoLink="email"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="Contact Info"
+                    android:textColor="#34495e"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="#34495e"/>
+
+                <TextView
+
+                    android:id="@+id/contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="email"
+                    android:padding="10dp"
+                    android:text="Testing only"
+                    android:textColor="#34495e"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
@@ -55,23 +83,34 @@
 
                 <TextView
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
                     android:autoLink="email"
                     android:gravity="center"
                     android:paddingTop="10dp"
                     android:text="Library Timings"
+                    android:textColor="#34495e"
                     android:textSize="18sp"
                     android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="#34495e"/>
 
                 <TextView
                     android:id="@+id/timing"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="email"
                     android:padding="10dp"
                     android:text="Testing only"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textColor="#34495e"
+                    android:textSize="18sp" />
 
             </LinearLayout>
         </android.support.v7.widget.CardView>

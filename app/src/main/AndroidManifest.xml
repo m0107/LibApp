@@ -22,7 +22,7 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".Contactus"
-            android:label="Contact Us"
+            android:label="General Information"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

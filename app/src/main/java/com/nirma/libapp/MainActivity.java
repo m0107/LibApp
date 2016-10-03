@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     GridView gridView;
     ArrayList<Item> gridArray = new ArrayList<Item>();
     CustomGridViewAdapter customGridAdapter;
+    float columnDelay=0.1f,rowDelay=0.1f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.nu);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle(" ITNU Library");
+
+
 
         Bitmap search = BitmapFactory.decodeResource(this.getResources(), R.drawable.search);
         Bitmap papers = BitmapFactory.decodeResource(this.getResources(), R.drawable.papers);
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap contact = BitmapFactory.decodeResource(this.getResources(), R.drawable.contact);
 
         Animation animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.grid_item_anim);
-        GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .1f, .1f);
+        GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, columnDelay, rowDelay);
 
 
         gridArray.add(new Item(userIcon,"Remote Access"));
@@ -128,5 +131,22 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        columnDelay=0f;
+        rowDelay=0f;
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        columnDelay=0f;
+        rowDelay=0f;
+
     }
 }
