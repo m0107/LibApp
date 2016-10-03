@@ -41,7 +41,6 @@
                 android:textColor="#34495e"
 
                 android:padding="10dp"
-                android:text="@string/about_us"
                 android:textSize="20sp"
                 />
 

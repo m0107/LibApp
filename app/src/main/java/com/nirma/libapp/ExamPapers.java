@@ -69,16 +69,16 @@ public class ExamPapers extends AppCompatActivity {
             if(!isredirected){
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(ExamPapers.this){
-                        @Override
+                       /* @Override
                         public void onBackPressed() {
                             super.onBackPressed();
                             browse.stopLoading();
                             progressDialog.cancel();
                             progressDialog.dismiss();
-                        }
+                        }*/
                     };
                     progressDialog.setIndeterminate(true);
-                    //progressDialog.setCancelable(true);
+                    progressDialog.setCancelable(false);
                     //progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
@@ -93,7 +93,7 @@ public class ExamPapers extends AppCompatActivity {
                                 Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }, 5000);
+                    }, 10000);
                     // Time Scheduler method
                     /*TimerTask task = new TimerTask() {
 

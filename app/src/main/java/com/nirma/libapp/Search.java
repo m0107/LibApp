@@ -68,7 +68,7 @@ public class Search extends AppCompatActivity {
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(Search.this);
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(true);
+                    progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
@@ -84,7 +84,7 @@ public class Search extends AppCompatActivity {
                                 Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
                             }
                         }
-                    }, 5000);
+                    }, 10000);
                 }
             }
         }

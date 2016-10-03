@@ -1,10 +1,12 @@
 package com.nirma.libapp;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -64,10 +66,23 @@ public class Login extends AppCompatActivity {
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(Login.this);
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(true);
+                    progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(progressDialog!=null && progressDialog.isShowing()) {
+                                final Intent mainIntent = new Intent(Login.this, MainActivity.class);
+                                mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                Login.this.finish();
+                                Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }, 10000);
                 }
             }
         }
