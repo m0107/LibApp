@@ -24,6 +24,8 @@ public class NewsClips extends AppCompatActivity {
     private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fnpc%2Fhome%3Fpli%3D1&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fnpc%2Fhome%3Fpli%3D1&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
+    private Handler TimeOutHandler;
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class NewsClips extends AppCompatActivity {
         }
 
         browse = (WebView) findViewById(R.id.NewClipswebView);
+        TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
@@ -72,18 +75,22 @@ public class NewsClips extends AppCompatActivity {
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
 
-                    new Handler().postDelayed(new Runnable() {
+                    runnable = new  Runnable() {
                         @Override
                         public void run() {
                             if(progressDialog!=null && progressDialog.isShowing()) {
                                 final Intent mainIntent = new Intent(NewsClips.this, MainActivity.class);
                                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                browse.stopLoading();
                                 startActivity(mainIntent);
                                 NewsClips.this.finish();
                                 Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
                             }
                         }
-                    }, 10000);
+                    };
+                    TimeOutHandler.postDelayed(runnable, 15000);
+
+
                 }
             }
         }
@@ -96,6 +103,7 @@ public class NewsClips extends AppCompatActivity {
             if (progressDialog!=null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
                 progressDialog = null;
+                TimeOutHandler.removeCallbacks(runnable);
             }
         }
     }

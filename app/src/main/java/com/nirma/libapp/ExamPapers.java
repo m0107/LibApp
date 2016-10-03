@@ -27,6 +27,8 @@ public class ExamPapers extends AppCompatActivity {
     private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Flibrary%2F&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Flibrary%2F&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
+    private Handler TimeOutHandler;
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,12 @@ public class ExamPapers extends AppCompatActivity {
         }
 
         browse = (WebView) findViewById(R.id.ExampaperswebView);
+        TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
         browse.loadUrl(MyUrl);
+
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -82,18 +86,20 @@ public class ExamPapers extends AppCompatActivity {
                     //progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
-                    new Handler().postDelayed(new Runnable() {
+                    runnable = new  Runnable() {
                         @Override
                         public void run() {
                             if(progressDialog!=null && progressDialog.isShowing()) {
                                 final Intent mainIntent = new Intent(ExamPapers.this, MainActivity.class);
                                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                browse.stopLoading();
                                 startActivity(mainIntent);
                                 ExamPapers.this.finish();
                                 Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }, 10000);
+                    };
+                   TimeOutHandler.postDelayed(runnable, 15000);
                     // Time Scheduler method
                     /*TimerTask task = new TimerTask() {
 
@@ -120,6 +126,7 @@ public class ExamPapers extends AppCompatActivity {
             if (progressDialog!=null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
                 progressDialog = null;
+                TimeOutHandler.removeCallbacks(runnable);
             }
         }
     }

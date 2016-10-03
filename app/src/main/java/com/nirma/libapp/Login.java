@@ -24,6 +24,8 @@ public class Login extends AppCompatActivity {
     private static final String url = "http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-user.pl";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
+    private Handler TimeOutHandler;
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class Login extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         browse = (WebView) findViewById(R.id.digwebView);
+        TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
@@ -71,18 +74,21 @@ public class Login extends AppCompatActivity {
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
 
-                    new Handler().postDelayed(new Runnable() {
+                    runnable = new  Runnable() {
                         @Override
                         public void run() {
                             if(progressDialog!=null && progressDialog.isShowing()) {
                                 final Intent mainIntent = new Intent(Login.this, MainActivity.class);
                                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                browse.stopLoading();
                                 startActivity(mainIntent);
                                 Login.this.finish();
                                 Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
                             }
                         }
-                    }, 10000);
+                    };
+                    TimeOutHandler.postDelayed(runnable, 15000);
+
                 }
             }
         }
@@ -96,6 +102,7 @@ public class Login extends AppCompatActivity {
             if (progressDialog!=null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
                 progressDialog = null;
+                TimeOutHandler.removeCallbacks(runnable);
             }
         }
     }
