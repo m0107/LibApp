@@ -24,6 +24,8 @@ public class Search extends AppCompatActivity {
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
     private Context context;
+    private Handler TimeOutHandler;
+    private Runnable runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class Search extends AppCompatActivity {
         }
 
         browse = (WebView) findViewById(R.id.searchwebView);
+        TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
@@ -73,18 +76,21 @@ public class Search extends AppCompatActivity {
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
 
-                    new Handler().postDelayed(new Runnable() {
+                    runnable = new  Runnable() {
                         @Override
                         public void run() {
                             if(progressDialog!=null && progressDialog.isShowing()) {
                                 final Intent mainIntent = new Intent(Search.this, MainActivity.class);
                                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                browse.stopLoading();
                                 startActivity(mainIntent);
                                 Search.this.finish();
                                 Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
                             }
                         }
-                    }, 10000);
+                    };
+                    TimeOutHandler.postDelayed(runnable, 15000);
+
                 }
             }
         }
@@ -97,6 +103,7 @@ public class Search extends AppCompatActivity {
             if (progressDialog!=null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
                 progressDialog = null;
+                TimeOutHandler.removeCallbacks(runnable);
             }
         }
     }
