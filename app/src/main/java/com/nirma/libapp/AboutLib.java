@@ -4,6 +4,7 @@ import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 public class AboutLib extends AppCompatActivity {
@@ -18,5 +19,7 @@ public class AboutLib extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+
     }
 }

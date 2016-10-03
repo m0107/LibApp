@@ -58,7 +58,8 @@
                     android:id="@+id/contact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autoLink="email"
+
+                    android:autoLink="web|email"
                     android:padding="10dp"
                     android:text="Testing only"
                     android:textColor="#34495e"

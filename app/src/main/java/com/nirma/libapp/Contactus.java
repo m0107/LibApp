@@ -27,10 +27,11 @@ public class Contactus extends AppCompatActivity {
                 "Nirma University\n" +
                 "Sarkhej-Gandhinagar Highway, \n" +
                 "Post: Chandlodia, Via : Gota, \n" +
-                "Ahmedabad - 382 481.\n" +
+                "Ahmedabad - '382481'.\n" +
                 "Gujarat, India\n" +
                 "\n" +
                 "E-mail: lib.it@nirmauni.ac.in\n" +
+                "FB: www.facebook.com/nuitlib\n" +
                 "Phone No: +91-2717-241911 to 15\n" +
                 "Fax No: +91-2717-241916-17\n";
         tv.setText(text);

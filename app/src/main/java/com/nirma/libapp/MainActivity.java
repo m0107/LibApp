@@ -52,13 +52,14 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, columnDelay, rowDelay);
 
 
-        gridArray.add(new Item(userIcon,"Remote Access"));
         gridArray.add(new Item(login,"Login-Library Account"));
         gridArray.add(new Item(search,"Search"));
+        gridArray.add(new Item(userIcon,"Remote Access"));
         gridArray.add(new Item(newarrival,"New Arrival"));
-        gridArray.add(new Item(periodic,"Content Page Service"));
         gridArray.add(new Item(news,"News Clips"));
         gridArray.add(new Item(papers,"Exam Papers"));
+
+        gridArray.add(new Item(periodic,"Content Page Service"));
         gridArray.add(new Item(contact,"Contact-us"));
 
 
