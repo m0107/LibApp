@@ -1,9 +1,13 @@
 package com.nirma.libapp;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -40,7 +44,10 @@ public class Contactus extends AppCompatActivity {
                 "Monday – Friday\n"+ "08:45 am to 06:15 pm\n\n" +
                 "Saturday:\n"+"08:45 am to 01:00 pm\n\n" +
                 "*Closed on Sundays & Public Holidays\n";
-        tv2.setText(timing);
+
+        Spannable wordtoSpan = new SpannableString(timing);
+        wordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), timing.indexOf('*'),timing.length()-1 , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tv2.setText(wordtoSpan);
 
 
 
