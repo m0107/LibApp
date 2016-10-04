@@ -99,7 +99,7 @@ public class ExamPapers extends AppCompatActivity {
                             }
                         }
                     };
-                   TimeOutHandler.postDelayed(runnable, 15000);
+                   TimeOutHandler.postDelayed(runnable, 30000);
                     // Time Scheduler method
                     /*TimerTask task = new TimerTask() {
 

@@ -87,7 +87,7 @@ public class PeriodicContent extends AppCompatActivity {
                             }
                         }
                     };
-                    TimeOutHandler.postDelayed(runnable, 15000);
+                    TimeOutHandler.postDelayed(runnable, 30000);
 
                 }
             }

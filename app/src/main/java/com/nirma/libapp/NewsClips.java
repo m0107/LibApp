@@ -88,7 +88,7 @@ public class NewsClips extends AppCompatActivity {
                             }
                         }
                     };
-                    TimeOutHandler.postDelayed(runnable, 15000);
+                    TimeOutHandler.postDelayed(runnable, 30000);
 
 
                 }
