@@ -46,7 +46,7 @@ public class Contactus extends AppCompatActivity {
                 "*Closed on Sundays & Public Holidays\n";
 
         Spannable wordtoSpan = new SpannableString(timing);
-        wordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), timing.indexOf('*'),timing.length()-1 , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        wordtoSpan.setSpan(new ForegroundColorSpan(Color.rgb(255,102,0)), timing.indexOf('*'),timing.length()-1 , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv2.setText(wordtoSpan);
 
 

@@ -18,12 +18,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class  MainActivity extends AppCompatActivity {
 
     GridView gridView;
     ArrayList<Item> gridArray = new ArrayList<Item>();
     CustomGridViewAdapter customGridAdapter;
     float columnDelay=0.1f,rowDelay=0.1f;
+    Animation animation;
+    GridLayoutAnimationController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         Bitmap contact = BitmapFactory.decodeResource(this.getResources(), R.drawable.contact);
 
-        Animation animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.grid_item_anim);
-        GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, columnDelay, rowDelay);
+        animation = AnimationUtils.loadAnimation(getBaseContext(),R.anim.grid_item_anim);
+         controller = new GridLayoutAnimationController(animation, columnDelay, rowDelay);
 
 
         gridArray.add(new Item(login,"Login-Library Account"));
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+         controller = new GridLayoutAnimationController(animation, columnDelay, rowDelay);
         columnDelay=0f;
         rowDelay=0f;
 
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+         controller = new GridLayoutAnimationController(animation, columnDelay, rowDelay);
         columnDelay=0f;
         rowDelay=0f;
 
