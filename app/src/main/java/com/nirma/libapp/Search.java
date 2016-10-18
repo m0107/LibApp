@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -43,6 +45,13 @@ public class Search extends AppCompatActivity {
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
+        ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        if (Build.VERSION.SDK_INT >= 19) {
+            browse.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            browse.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         browse.loadUrl(url);
 
 

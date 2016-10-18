@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -62,6 +63,14 @@ public class ExamPapers extends AppCompatActivity {
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
+
+        ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        if (Build.VERSION.SDK_INT >= 19) {
+            browse.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            browse.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         browse.loadUrl(MyUrl);
 
         // FOR ANY DOWNLOAD WE HAVE TO INCLUDE THIS CODE
