@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -45,6 +47,13 @@ public class ELib extends AppCompatActivity {
         ws = browse.getSettings();
         TimeOutHandler = new Handler();
         ws.setJavaScriptEnabled(true);
+        ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        if (Build.VERSION.SDK_INT >= 19) {
+            browse.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        }
+        else {
+            browse.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
         browse.loadUrl(MyUrl);
         // FOR ANY DOWNLOAD WE HAVE TO INCLUDE THIS CODE
 
