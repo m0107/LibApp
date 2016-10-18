@@ -23,10 +23,9 @@ public class AboutLib extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        //JustifiedTextView myMsg = (JustifiedTextView)findViewById(R.id.aboutus);
-       // myMsg.setText(getResources().getString(R.string.about_us));
-       // tv.setText(Html.fromHtml("<div style='text-align: justify;text-justify: inter-word;'>"+getResources().getString(R.string.about_us)+"</div>"));
 
+       // tv.setText(Html.fromHtml("<div style=\"text-align: justify;text-justify: inter-word;\">"+getResources().getString(R.string.about_us)+"</div>"));
+      //android:textAppearance="?android:attr/textAppearanceSmall"
 
     }
 }

@@ -1,9 +1,11 @@
 package com.nirma.libapp;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -25,6 +28,7 @@ public class PeriodicContent extends AppCompatActivity {
     private boolean isredirected = false;
     private Handler TimeOutHandler;
     private Runnable runnable;
+    private String File_Name = "Sample.pdf";
     private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
 
     @Override
@@ -44,6 +48,29 @@ public class PeriodicContent extends AppCompatActivity {
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
         browse.loadUrl(MyUrl);
+        // FOR ANY DOWNLOAD WE HAVE TO INCLUDE THIS CODE
+
+        browse.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent,
+                                        String contentDisposition, String mimetype,
+                                        long contentLength) {
+                DownloadManager.Request request = new DownloadManager.Request(
+                        Uri.parse(url));
+
+                request.allowScanningByMediaScanner();
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED); //Notify client once download is completed!
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, File_Name); // "every file will be saved as paper.pdf"
+                DownloadManager dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+                dm.enqueue(request);
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT); //This is important!
+                intent.addCategory(Intent.CATEGORY_OPENABLE); //CATEGORY.OPENABLE
+                Toast.makeText(getApplicationContext(), "Downloading File", //To notify the Client that the file is being downloaded
+                        Toast.LENGTH_LONG).show();
+
+
+            }
+        });
     }
 
     private class MyWebViewClient extends WebViewClient {
