@@ -25,7 +25,8 @@ public class NewArrival extends AppCompatActivity {
 
     WebView browse;
     WebSettings ws;
-    private static final String MyUrl = "http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=ITDIS";
+
+    String myUrl;
     private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
@@ -36,6 +37,34 @@ public class NewArrival extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        switch(getIntent().getExtras().getString("Institute"))
+        {
+            case "Technology":
+                myUrl="http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=ITDIS";
+                break;
+
+            case "Management":
+                myUrl="http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=IMDIS";
+                break;
+            case "Pharmacy":
+                myUrl="http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=IPDIS";
+                break;
+            case "Science":
+                myUrl="http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=ISDIS";
+                break;
+            case "Law":
+                myUrl="http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=ILDIS";
+                break;
+            case "Architecture":
+                myUrl="http://librarysearch.nirmauni.ac.in/cgi-bin/koha/opac-search.pl?q=ccode=IADIS";
+                break;
+            case "Commerce":
+                myUrl="coming-soon";
+                break;
+        }
+
+
         setContentView(R.layout.activity_new_arrival);
         Toolbar toolbar = (Toolbar) findViewById(R.id.newArraivaltoolbar);
         if (toolbar != null) {
@@ -55,7 +84,7 @@ public class NewArrival extends AppCompatActivity {
         else {
             browse.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        browse.loadUrl(MyUrl);
+        browse.loadUrl(myUrl);
         // FOR ANY DOWNLOAD WE HAVE TO INCLUDE THIS CODE
 
         browse.setDownloadListener(new DownloadListener() {
@@ -86,7 +115,7 @@ public class NewArrival extends AppCompatActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(Uri.parse(url).getHost().equals(MyUrl+"/")){
+            if(Uri.parse(url).getHost().equals(myUrl+"/")){
                 return false;
             }
             return super.shouldOverrideUrlLoading(view, url);
@@ -123,7 +152,7 @@ public class NewArrival extends AppCompatActivity {
                             }
                         }
                     };
-                    TimeOutHandler.postDelayed(runnable, 30000);
+                    TimeOutHandler.postDelayed(runnable, 60000);
 
                 }
             }
@@ -146,7 +175,7 @@ public class NewArrival extends AppCompatActivity {
     public void onBackPressed() {
 
         Log.d("url:",browse.getUrl());
-        if(browse.getUrl().equals(MyUrl) || browse.getUrl().equals(googleUrl)){
+        if(browse.getUrl().equals(myUrl) || browse.getUrl().equals(googleUrl)){
             this.finish();
 
         }

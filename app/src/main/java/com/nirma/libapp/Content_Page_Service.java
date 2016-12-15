@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -21,31 +21,58 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class ELib extends AppCompatActivity {
+public class Content_Page_Service extends AppCompatActivity {
 
     WebView browse;
     WebSettings ws;
-    private static final String MyUrl = "http://elibrary.nirmauni.ac.in";
-    private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Flibrary%2F&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Flibrary%2F&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
+    String myUrl ;
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
     private Handler TimeOutHandler;
     private Runnable runnable;
     private String File_Name = "Sample.pdf";
+    private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Fcontent%2F%3Fpli%3D1&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_elib);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.elibtoolbar);
+        setContentView(R.layout.activity_periodic_content);
+        switch(getIntent().getExtras().getString("Institute"))
+        {
+            case "Technology":
+                myUrl="http://www.nirmauni.ac.in/itlib/Periodical'sContentPages";
+                break;
+
+            case "Management":
+                myUrl="coming-soon";
+                break;
+            case "Pharmacy":
+                myUrl="comin-soon";
+                break;
+            case "Science":
+                myUrl="coming-soon";
+                break;
+            case "Law":
+                myUrl="coming-soon";
+                break;
+            case "Architecture":
+                myUrl="coming-soon";
+                break;
+            case "Commerce":
+                myUrl="coming soon";
+                break;
+        }
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.periodicContenttoolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        browse = (WebView) findViewById(R.id.elibwebView);
+
+        browse = (WebView) findViewById(R.id.periodicContentwebView);
+        TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
         ws = browse.getSettings();
-        TimeOutHandler = new Handler();
         ws.setJavaScriptEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
         if (Build.VERSION.SDK_INT >= 19) {
@@ -54,7 +81,7 @@ public class ELib extends AppCompatActivity {
         else {
             browse.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        browse.loadUrl(MyUrl);
+        browse.loadUrl(myUrl);
         // FOR ANY DOWNLOAD WE HAVE TO INCLUDE THIS CODE
 
         browse.setDownloadListener(new DownloadListener() {
@@ -78,14 +105,13 @@ public class ELib extends AppCompatActivity {
 
             }
         });
-
     }
 
     private class MyWebViewClient extends WebViewClient {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(Uri.parse(url).getHost().equals(MyUrl+"/")){
+            if(Uri.parse(url).getHost().equals(myUrl+"/")){
                 return false;
             }
             return super.shouldOverrideUrlLoading(view, url);
@@ -102,51 +128,31 @@ public class ELib extends AppCompatActivity {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(ELib.this){
-                       /* @Override
-                        public void onBackPressed() {
-                            super.onBackPressed();
-                            browse.stopLoading();
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                        }*/
-                    };
+                    progressDialog = new ProgressDialog(Content_Page_Service.this);
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);
-                    //progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
+
                     runnable = new  Runnable() {
                         @Override
                         public void run() {
                             if(progressDialog!=null && progressDialog.isShowing()) {
-                                final Intent mainIntent = new Intent(ELib.this, MainActivity.class);
+                                final Intent mainIntent = new Intent(Content_Page_Service.this, MainActivity.class);
                                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 browse.stopLoading();
                                 startActivity(mainIntent);
-                                ELib.this.finish();
-                                Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_SHORT).show();
+                                Content_Page_Service.this.finish();
+                                Toast.makeText(getApplication(),"Slow Internet Connection",Toast.LENGTH_LONG).show();
                             }
                         }
                     };
-                    TimeOutHandler.postDelayed(runnable, 30000);
-                    // Time Scheduler method
-                    /*TimerTask task = new TimerTask() {
+                    TimeOutHandler.postDelayed(runnable, 60000);
 
-                        @Override
-                        public void run() {
-                            // TODO Auto-generated method stub
-                            Intent intent = new Intent(ExamPapers.this, MainActivity.class);
-                            startActivity(intent);
-                            ExamPapers.this.finish();
-                        }
-                    };
-                    Timer t = new Timer();
-                    t.schedule(task, 5000);*/
                 }
             }
         }
-
 
         @Override
         public void onPageFinished(WebView view, String url) {
@@ -165,7 +171,7 @@ public class ELib extends AppCompatActivity {
     public void onBackPressed() {
 
         Log.d("url:",browse.getUrl());
-        if(browse.getUrl().equals(MyUrl) || browse.getUrl().equals(googleUrl)){
+        if(browse.getUrl().equals(myUrl) || browse.getUrl().equals(googleUrl)){
             this.finish();
 
         }

@@ -3,8 +3,6 @@
     package="com.nirma.libapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -14,7 +12,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,46 +22,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".Contactus"
             android:label="General Information"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".Search"
             android:label="Search"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ELib"
+            android:name=".Remote_Access"
             android:label="Remote Access"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".Login"
+            android:name=".Login_Library_Account"
             android:label="Login Library Acc."
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-        <activity android:name=".Splash"
+        <activity
+            android:name=".Splash"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,20 +71,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name=".NewArrival"
             android:label="New Arrival"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
         <activity
-            android:name=".PeriodicContent"
-            android:screenOrientation="portrait"
+            android:name=".Content_Page_Service"
             android:label="Content Page Service"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
@@ -93,8 +93,8 @@
         <activity
             android:name=".NewsClips"
             android:label="NewsClips"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
@@ -103,27 +103,23 @@
         <activity
             android:name=".ExamPapers"
             android:label="ExamPapers"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
             />
         </activity>
-
-        <activity android:name=".AboutLib"
+        <activity
+            android:name=".AboutLib"
             android:label="About-Library"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
-
-
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
-
-
-
         </activity>
+        <activity android:name=".Select_institute"></activity>
     </application>
 
 </manifest>

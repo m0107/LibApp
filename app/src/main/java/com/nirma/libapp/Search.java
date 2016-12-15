@@ -98,7 +98,7 @@ public class Search extends AppCompatActivity {
                             }
                         }
                     };
-                    TimeOutHandler.postDelayed(runnable, 30000);
+                    TimeOutHandler.postDelayed(runnable, 60000);
 
                 }
             }

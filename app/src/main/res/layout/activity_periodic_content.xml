@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.nirma.libapp.PeriodicContent">
+    tools:context="com.nirma.libapp.Content_Page_Service">
 
     <include
         android:id="@+id/periodicContenttoolbar"

@@ -36,7 +36,7 @@ public class ExamPapers extends AppCompatActivity {
 
     WebView browse;
     WebSettings ws;
-    private static final String MyUrl = "https://sites.google.com/a/nirmauni.ac.in/library/";
+    String myUrl;
     private static final String googleUrl="https://accounts.google.com/ServiceLogin?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Flibrary%2F&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fnirmauni.ac.in%2Flibrary%2F&btmpl=mobile&hd=nirmauni.ac.in&service=jotspot&sacu=1&rip=1#identifier";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
@@ -50,6 +50,33 @@ public class ExamPapers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_papers);
+
+        switch(getIntent().getExtras().getString("Institute"))
+        {
+            case "Technology":
+                myUrl="https://sites.google.com/a/nirmauni.ac.in/library/";
+                break;
+
+            case "Management":
+                myUrl="Coming-soon";
+                break;
+            case "Pharmacy":
+                myUrl="https://sites.google.com/a/nirmauni.ac.in/pharmacy-library/";
+                break;
+            case "Science":
+                myUrl="https://sites.google.com/a/nirmauni.ac.in/is-library/";
+                break;
+            case "Law":
+                myUrl="https://sites.google.com/a/nirmauni.ac.in/exam-papers/";
+                break;
+            case "Architecture":
+                myUrl="https://sites.google.com/a/nirmauni.ac.in/ia-exampapers/";
+                break;
+            case "Commerce":
+                myUrl="coming-soon";
+                break;
+        }
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.Exampaperstoolbar);
@@ -71,7 +98,7 @@ public class ExamPapers extends AppCompatActivity {
         else {
             browse.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
-        browse.loadUrl(MyUrl);
+        browse.loadUrl(myUrl);
 
         // FOR ANY DOWNLOAD WE HAVE TO INCLUDE THIS CODE
 
@@ -174,7 +201,7 @@ public class ExamPapers extends AppCompatActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if(Uri.parse(url).getHost().equals(MyUrl+"/")){
+            if(Uri.parse(url).getHost().equals(myUrl+"/")){
                 return false;
             }
             return super.shouldOverrideUrlLoading(view, url);
@@ -272,7 +299,7 @@ public class ExamPapers extends AppCompatActivity {
     public void onBackPressed() {
 
         Log.d("url:",browse.getUrl());
-        if(browse.getUrl().equals(MyUrl) || browse.getUrl().equals(googleUrl)){
+        if(browse.getUrl().equals(myUrl) || browse.getUrl().equals(googleUrl)){
             this.finish();
 
         }

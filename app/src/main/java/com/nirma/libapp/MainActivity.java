@@ -14,7 +14,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.GridLayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -77,35 +76,43 @@ public class  MainActivity extends AppCompatActivity {
                 Intent i;
                 switch(data.getTitle()){
                     case "Remote Access":
-                        i = new Intent(MainActivity.this,ELib.class);
+                        i = new Intent(MainActivity.this,Remote_Access.class);
+                        i.putExtra("facility","Remote Access");
                         startActivity(i);
                         break;
                     case"Login-Library Account":
-                        i = new Intent(MainActivity.this,Login.class);
+                        i = new Intent(MainActivity.this,Login_Library_Account.class);
+                        i.putExtra("facility","Login-Library Account");
                         startActivity(i);
                         break;
                     case "Search":
                         i = new Intent(MainActivity.this,Search.class);
+                        i.putExtra("facility","Search");
                         startActivity(i);
                         break;
                     case "Contact-us":
                         i = new Intent(MainActivity.this,Contactus.class);
+                        i.putExtra("facility","Contact-us");
                         startActivity(i);
                         break;
                     case "New Arrival":
-                        i = new Intent(MainActivity.this,NewArrival.class);
+                        i = new Intent(MainActivity.this,Select_institute.class);
+                        i.putExtra("facility","New Arrival");
                         startActivity(i);
                         break;
                     case "Content Page Service":
-                        i = new Intent(MainActivity.this,PeriodicContent.class);
+                        i = new Intent(MainActivity.this,Select_institute.class);
+                        i.putExtra("facility","Content Page Service");
                         startActivity(i);
                         break;
                     case "News Clips":
-                        i = new Intent(MainActivity.this,NewsClips.class);
+                        i = new Intent(MainActivity.this,Select_institute.class);
+                        i.putExtra("facility","News Clips");
                         startActivity(i);
                         break;
                     case "Exam Papers":
-                        i = new Intent(MainActivity.this,ExamPapers.class);
+                        i = new Intent(MainActivity.this,Select_institute.class);
+                        i.putExtra("facility","Exam Papers");
                         startActivity(i);
                         break;
                 }

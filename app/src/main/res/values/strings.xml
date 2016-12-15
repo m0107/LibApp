@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">ITNU LIB</string>
-    <string name="about_us">Recognizing the role of library and information services in meeting the requirements of the Institutes academic, research, training and consultancy activities. The Library was set-up as one of the key divisions of the Institute of Technology, Nirma University. The Institute of Technology Library is one of the best engineering libraries in the state. The collection is mainly strong in engineering and technology, however good information sources on humanities and social sciences are also available.</string>
+    <string name="about_us">
+	Dwelling on new digital initiatives the Nirma University Library Resource Centers cater to the academic interests and research needs of the students and faculty members of the University. There are seven Institutes namely, Institute of Technology, Institute of Management, Institute of Pharmacy, Institute of Science, Institute of Law, Institute of Architecture and Planning and Institute of Commerce offering Under Graduate, Post Graduate, Executive Diploma programs and Doctoral Studies in varied branches of human knowledge. Each Institute has a full-fledged Library Resource Centre (LRC).
+</string>
     <string name="sample_string"><![CDATA[<h2>Title</h2><br><p>Description here</p>]]></string>
-
+    <string name="loginInfo">Here you can see the status of your Library Account with Library Login and Password (Login and Password details already sent by the library in nirmauni mail account.Still if you have any problem, contact to library staff.)
+</string>
+    <string name="remoteLoginInfo"> Here registered users can access online journals i.e. subscribed by Nirma University with Nirma Uni E-mail and Password. (For registration, contact to the Librarian)</string>
 
 </resources>
 
