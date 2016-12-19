@@ -56,7 +56,6 @@ public class ExamPapers extends AppCompatActivity {
             case "Technology":
                 myUrl="https://sites.google.com/a/nirmauni.ac.in/library/";
                 break;
-
             case "Management":
                 myUrl="Coming-soon";
                 break;
@@ -228,17 +227,20 @@ public class ExamPapers extends AppCompatActivity {
             if(!isredirected){
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(ExamPapers.this){
-                       /* @Override
+                        @Override
                         public void onBackPressed() {
                             super.onBackPressed();
                             browse.stopLoading();
                             progressDialog.cancel();
                             progressDialog.dismiss();
-                        }*/
+                            ExamPapers.this.finish();
+                        }
+
                     };
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(false);
-                    //progressDialog.setCanceledOnTouchOutside(false);
+                    progressDialog.setCancelable(true);
+
+                    progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
                     runnable = new  Runnable() {
@@ -303,6 +305,11 @@ public class ExamPapers extends AppCompatActivity {
             this.finish();
 
         }
+        /*else if(progressDialog!=null && progressDialog.isShowing()){
+            progressDialog.dismiss();
+            browse.stopLoading();
+            ExamPapers.this.finish();
+        }*/
         else{
             browse.goBack();
         }

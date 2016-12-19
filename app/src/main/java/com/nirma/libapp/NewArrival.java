@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -33,6 +34,7 @@ public class NewArrival extends AppCompatActivity {
     private Handler TimeOutHandler;
     private Runnable runnable;
     private String File_Name = "Sample.pdf";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,20 @@ public class NewArrival extends AppCompatActivity {
         browse = (WebView) findViewById(R.id.newArrivalwebView);
         TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                Log.d("progress:",String.valueOf(newProgress)+"%");
+                if(newProgress>60){                                              //if 60% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        Log.d("Pbar","closed");
+                    }
+                }
+            }
+        });
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -109,6 +125,7 @@ public class NewArrival extends AppCompatActivity {
             }
         });
 
+
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -120,6 +137,8 @@ public class NewArrival extends AppCompatActivity {
             }
             return super.shouldOverrideUrlLoading(view, url);
         }
+
+
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -168,6 +187,12 @@ public class NewArrival extends AppCompatActivity {
                 progressDialog = null;
                 TimeOutHandler.removeCallbacks(runnable);
             }
+        }
+
+        @Override
+        public void onPageCommitVisible(WebView view, String url) {
+            super.onPageCommitVisible(view, url);
+            Log.d("paheloaded","truue");
         }
     }
 
