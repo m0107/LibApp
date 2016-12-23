@@ -119,7 +119,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.nirma.libapp.MainActivity" />
         </activity>
-        <activity android:name=".Select_institute"></activity>
+        <activity
+            android:name=".Select_institute"
+            android:label="InstituteList"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nirma.libapp.MainActivity" />
+
+        </activity>
     </application>
 
 </manifest>

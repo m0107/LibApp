@@ -34,7 +34,7 @@ public class  MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setLogo(R.drawable.nu);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setTitle(" ITNU Library");
+        getSupportActionBar().setTitle(" NU Library");
 
 
 

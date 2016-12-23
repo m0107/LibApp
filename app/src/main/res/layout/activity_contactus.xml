@@ -89,7 +89,7 @@
                     android:autoLink="email"
                     android:gravity="center"
                     android:paddingTop="10dp"
-                    android:text="Library Timings"
+                    android:text="E-mail"
                     android:textColor="#34495e"
                     android:textSize="18sp"
                     android:textStyle="bold" />
