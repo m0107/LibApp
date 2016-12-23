@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -22,7 +23,7 @@ public class Search extends AppCompatActivity {
 
     WebView browse;
     WebSettings ws;
-    private static final String url = "http://librarysearch.nirmauni.ac.in";
+    private static final String url = "http://librarysearch.nirmauni.ac.in/";
     private ProgressDialog progressDialog=null;
     private boolean isredirected = false;
     private Context context;
@@ -43,6 +44,21 @@ public class Search extends AppCompatActivity {
         browse = (WebView) findViewById(R.id.searchwebView);
         TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
+                    }
+                }
+            }
+        });
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -74,11 +90,24 @@ public class Search extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(Search.this);
+                    progressDialog = new ProgressDialog(Search.this){
+                        @Override
+                        public void onBackPressed() {
+                            super.onBackPressed();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                progressDialog = null;
+                                Search.this.finish();
+
+                        }
+
+                    };
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);
@@ -120,7 +149,7 @@ public class Search extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if(browse.getUrl().equals(url+"/")){
+        if(browse.getUrl().equals(url)){
             this.finish();
 
         }

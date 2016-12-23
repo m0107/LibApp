@@ -82,6 +82,8 @@ public class Content_Page_Service extends AppCompatActivity {
                     if(progressDialog!=null && progressDialog.isShowing()){
                         progressDialog.cancel();
                         progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
                         Log.d("Pbar","closed");
                     }
                 }
@@ -139,7 +141,7 @@ public class Content_Page_Service extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
@@ -147,10 +149,12 @@ public class Content_Page_Service extends AppCompatActivity {
                         @Override
                         public void onBackPressed() {
                             super.onBackPressed();
-                            browse.stopLoading();
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                            Content_Page_Service.this.finish();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                Content_Page_Service.this.finish();
+
                         }
 
                     };

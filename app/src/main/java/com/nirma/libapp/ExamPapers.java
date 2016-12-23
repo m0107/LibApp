@@ -97,7 +97,8 @@ public class ExamPapers extends AppCompatActivity {
                     if(progressDialog!=null && progressDialog.isShowing()){
                         progressDialog.cancel();
                         progressDialog.dismiss();
-
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
                     }
                 }
             }
@@ -237,7 +238,7 @@ public class ExamPapers extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
@@ -245,10 +246,14 @@ public class ExamPapers extends AppCompatActivity {
                         @Override
                         public void onBackPressed() {
                             super.onBackPressed();
-                            browse.stopLoading();
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                            ExamPapers.this.finish();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                progressDialog = null;
+                                ExamPapers.this.finish();
+
+                            Log.d("backPrssed","True");
                         }
 
                     };
@@ -319,11 +324,7 @@ public class ExamPapers extends AppCompatActivity {
             this.finish();
 
         }
-        /*else if(progressDialog!=null && progressDialog.isShowing()){
-            progressDialog.dismiss();
-            browse.stopLoading();
-            ExamPapers.this.finish();
-        }*/
+
         else{
             browse.goBack();
         }

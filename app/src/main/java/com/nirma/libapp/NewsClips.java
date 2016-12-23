@@ -116,7 +116,8 @@ public class NewsClips extends AppCompatActivity {
                     if(progressDialog!=null && progressDialog.isShowing()){
                         progressDialog.cancel();
                         progressDialog.dismiss();
-
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
                     }
                 }
             }
@@ -140,7 +141,7 @@ public class NewsClips extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
@@ -148,10 +149,12 @@ public class NewsClips extends AppCompatActivity {
                         @Override
                         public void onBackPressed() {
                             super.onBackPressed();
-                            browse.stopLoading();
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                            NewsClips.this.finish();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                NewsClips.this.finish();
+
                         }
 
                     };
