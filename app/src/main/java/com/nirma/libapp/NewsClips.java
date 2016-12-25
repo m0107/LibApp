@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -106,6 +107,21 @@ public class NewsClips extends AppCompatActivity {
 
             }
         });
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
+                    }
+                }
+            }
+        });
     }
 
     private class MyWebViewClient extends WebViewClient {
@@ -125,11 +141,23 @@ public class NewsClips extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(NewsClips.this);
+                    progressDialog = new ProgressDialog(NewsClips.this){
+                        @Override
+                        public void onBackPressed() {
+                            super.onBackPressed();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                NewsClips.this.finish();
+
+                        }
+
+                    };
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);

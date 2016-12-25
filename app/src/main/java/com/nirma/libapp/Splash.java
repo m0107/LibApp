@@ -23,6 +23,7 @@ public class Splash extends AppCompatActivity {
     {
         Intent intent = new Intent(Splash.this,MainActivity.class);
         startActivity(intent);
+        finish();
 
     }
 }

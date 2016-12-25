@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -40,6 +41,21 @@ public class Login_Library_Account extends AppCompatActivity {
         browse = (WebView) findViewById(R.id.digwebView);
         TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
+                    }
+                }
+            }
+        });
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -70,12 +86,25 @@ public class Login_Library_Account extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             Log.d("pageLoad1:","true");
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(Login_Library_Account.this);
+                    progressDialog = new ProgressDialog(Login_Library_Account.this){
+                        @Override
+                        public void onBackPressed() {
+                            super.onBackPressed();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                progressDialog = null;
+                                Login_Library_Account.this.finish();
+
+                        }
+
+                    };
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);
                     progressDialog.setMessage("You can see the status of your Library Account with Library Login_Library_Account and Password");

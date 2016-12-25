@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -87,6 +88,21 @@ public class ExamPapers extends AppCompatActivity {
         browse = (WebView) findViewById(R.id.ExampaperswebView);
         TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
+                    }
+                }
+            }
+        });
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
 
@@ -222,7 +238,7 @@ public class ExamPapers extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
@@ -230,16 +246,19 @@ public class ExamPapers extends AppCompatActivity {
                         @Override
                         public void onBackPressed() {
                             super.onBackPressed();
-                            browse.stopLoading();
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                            ExamPapers.this.finish();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                progressDialog = null;
+                                ExamPapers.this.finish();
+
+                            Log.d("backPrssed","True");
                         }
 
                     };
                     progressDialog.setIndeterminate(true);
-                    progressDialog.setCancelable(true);
-
+                    progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.setMessage("Loading...");
                     progressDialog.show();
@@ -305,11 +324,7 @@ public class ExamPapers extends AppCompatActivity {
             this.finish();
 
         }
-        /*else if(progressDialog!=null && progressDialog.isShowing()){
-            progressDialog.dismiss();
-            browse.stopLoading();
-            ExamPapers.this.finish();
-        }*/
+
         else{
             browse.goBack();
         }

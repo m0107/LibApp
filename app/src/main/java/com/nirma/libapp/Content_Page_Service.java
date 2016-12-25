@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -72,6 +73,22 @@ public class Content_Page_Service extends AppCompatActivity {
         browse = (WebView) findViewById(R.id.periodicContentwebView);
         TimeOutHandler = new Handler();
         browse.setWebViewClient(new MyWebViewClient());
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                Log.d("progress:",String.valueOf(newProgress)+"%");
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
+                        Log.d("Pbar","closed");
+                    }
+                }
+            }
+        });
         ws = browse.getSettings();
         ws.setJavaScriptEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
@@ -124,11 +141,23 @@ public class Content_Page_Service extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(Content_Page_Service.this);
+                    progressDialog = new ProgressDialog(Content_Page_Service.this){
+                        @Override
+                        public void onBackPressed() {
+                            super.onBackPressed();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                Content_Page_Service.this.finish();
+
+                        }
+
+                    };
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);

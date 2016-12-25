@@ -20,6 +20,7 @@
             android:id="@+id/custImg"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:src="@mipmap/ic_launcher"
             android:layout_gravity="center_horizontal"
             />
 
@@ -29,8 +30,8 @@
             android:textColor="#000"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-
             android:gravity="center"
+            android:text="Test2"
             android:layout_marginTop="10dp"
             android:textSize="15dp"
             android:textAppearance="?android:attr/textAppearanceMedium" />

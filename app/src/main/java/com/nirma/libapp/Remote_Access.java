@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.DownloadListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -44,6 +45,21 @@ public class Remote_Access extends AppCompatActivity {
         }
         browse = (WebView) findViewById(R.id.elibwebView);
         browse.setWebViewClient(new MyWebViewClient());
+        browse.setWebChromeClient(new WebChromeClient(){
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
+                    if(progressDialog!=null && progressDialog.isShowing()){
+                        progressDialog.cancel();
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
+                    }
+                }
+            }
+        });
         ws = browse.getSettings();
         TimeOutHandler = new Handler();
         ws.setJavaScriptEnabled(true);
@@ -98,18 +114,23 @@ public class Remote_Access extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
                     progressDialog = new ProgressDialog(Remote_Access.this){
-                       /* @Override
+                        @Override
                         public void onBackPressed() {
                             super.onBackPressed();
-                            browse.stopLoading();
-                            progressDialog.cancel();
-                            progressDialog.dismiss();
-                        }*/
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                progressDialog = null;
+                                Remote_Access.this.finish();
+
+                        }
+
                     };
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);

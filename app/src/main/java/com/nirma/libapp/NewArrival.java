@@ -81,12 +81,13 @@ public class NewArrival extends AppCompatActivity {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
-                Log.d("progress:",String.valueOf(newProgress)+"%");
-                if(newProgress>60){                                              //if 60% is loaded then close Progressbar
+
+                if(newProgress>50){                                              //if 50% is loaded then close Progressbar
                     if(progressDialog!=null && progressDialog.isShowing()){
                         progressDialog.cancel();
                         progressDialog.dismiss();
-                        Log.d("Pbar","closed");
+                        progressDialog = null;
+                        TimeOutHandler.removeCallbacks(runnable);
                     }
                 }
             }
@@ -147,11 +148,24 @@ public class NewArrival extends AppCompatActivity {
         }
 
         @Override
-        public void onLoadResource(WebView view, String url) {
+        public void onLoadResource(WebView view, final String url) {
             super.onLoadResource(view, url);
             if(!isredirected){
                 if(progressDialog==null){
-                    progressDialog = new ProgressDialog(NewArrival.this);
+                    progressDialog = new ProgressDialog(NewArrival.this){
+                        @Override
+                        public void onBackPressed() {
+                            super.onBackPressed();
+
+                                browse.stopLoading();
+                                progressDialog.cancel();
+                                progressDialog.dismiss();
+                                progressDialog = null;
+                                NewArrival.this.finish();
+
+                        }
+
+                    };
                     progressDialog.setIndeterminate(true);
                     progressDialog.setCancelable(false);
                     progressDialog.setCanceledOnTouchOutside(false);

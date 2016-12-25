@@ -31,14 +31,15 @@
             android:layout_height="2dp"
             android:background="@color/colorPrimaryDark"/>
 
-        <ListView
-            android:layout_marginTop="10dp"
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleview"
             android:padding="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            android:id="@+id/instituteName"
             android:layout_height="match_parent">
 
-        </ListView>
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 </RelativeLayout>
