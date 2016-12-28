@@ -14,12 +14,12 @@ public class Splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
     }
-    void mis(View view)
+    public void mis(View view)
     {
 
         Toast.makeText(getApplicationContext(),"Coming Soon",Toast.LENGTH_LONG).show();
     }
-    void lib(View view)
+    public void lib(View view)
     {
         Intent intent = new Intent(Splash.this,MainActivity.class);
         startActivity(intent);
