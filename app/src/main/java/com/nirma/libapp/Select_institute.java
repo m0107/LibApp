@@ -37,16 +37,18 @@ public class Select_institute extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_institute);
+        facility =getIntent().getExtras().getString("facility");
         Toolbar toolbar = (Toolbar) findViewById(R.id.InstituteList);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(facility);
         }
 
-       facility =getIntent().getExtras().getString("facility");
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycleview);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), R.drawable.divider));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), R.drawable.divider));
         radpater = new Radpater(this,names);
         recyclerView.setAdapter(radpater);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
